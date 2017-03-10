@@ -5,10 +5,10 @@
         <h4>this is a h4 header</h4>
         <ul class="control-zone">
           <li>
-            <a class="el-icon-d-caret"></a>
+            <a class="el-icon-d-caret" @click="pinFrame(index, $event)" :class="{active: pined}"></a>
           </li>
-          <li>
-            <a class="el-icon-plus"></a>
+          <li class="fullscreen-btn">
+            <a class="el-icon-plus" @click="toggleFullscreen"></a>
           </li>
           <li>
             <a class="el-icon-arrow-up" @click="toggleFrame"></a>
@@ -36,18 +36,47 @@ import $ from 'webpack-zepto'
 export default {
   data: function() {
     return {
-      title: 'asdasd'
+      title: 'asdasd',
+      isFullscreem: false
     }
   },
-  props: ['index', 'frame'],
+  props: ['index', 'frame', 'pined'],
   methods: {
-    toggleFrame: function(){
-      console.log(this.$el)
+    toggleFrame: function() {
       $(this.$el).find('.frame-content').toggleClass('slide-up')
     },
     removeFrame: function(index) {
-      console.log(this.frame)
       this.$store.commit('removeFrame', index)
+    },
+    pinFrame: function(index, event){
+      let $target = $(event.target)
+      if(this.pined){
+        this.$store.commit('unpinFrame', index)  
+      }else{
+        this.$store.commit('pinFrame', index)  
+      }
+      
+    },
+    toggleFullscreen: function() {
+      let $el = $(this.$el)
+      $el.toggleClass('frame-fullscreen');
+      $('.main-container').toggleClass('hide-scrollbar');
+      if (!this.isFullscreem) {
+        this.isFullscreem = true
+        $el.find('.control-zone li').not('.fullscreen-btn').hide()
+        $el.width(window.innerWidth)
+        $el.height(window.innerHeight)
+        $(window).on('resize', function(event) {
+          event.preventDefault();
+          $el.width(window.innerWidth)
+          $el.height(window.innerHeight)
+        });
+      } else {
+        $(window).off('resize')
+        $el.removeAttr('style')
+        $el.find('.control-zone li').not('.fullscreen-btn').show()
+        this.isFullscreem = false
+      }
     }
   }
 }
@@ -111,19 +140,34 @@ export default {
             text-align: center;
             line-height: 39px;
             cursor: pointer;
+            &.active{
+              color: red;
+            }
           }
         }
       }
     }
-    .frame-content{
+    .frame-content {
       min-height: 300px;
       overflow: hidden;
       max-height: 500px;
       transition: all .1s ease-out;
-      &.slide-up{
+      &.slide-up {
         min-height: 0;
         max-height: 0;
       }
+    }
+  }
+  &.frame-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-height: none;
+    z-index: 999;
+    background: #fff;
+    .frame-box {
+      margin: 0;
+      height: 100%;
     }
   }
 }

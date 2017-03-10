@@ -4,16 +4,23 @@
     <!-- <router-view></router-view> -->
     <div class="frame-container">
       <div class="frame-stream">
-        <transition-group name="frame-fade">
-          <v-frame v-for="(frame, index) in frames" track-by :index="index" :frame="frame" :key="frame.key"></v-frame>
-        </transition-group>
+        <div class="frame-pined">
+          <transition-group name="frame-fade">
+            <v-frame v-for="(frame, index) in pinFrames" :index="index" :frame="frame" :key="frame.key" pined="true"></v-frame>
+          </transition-group>
+        </div>
+        <div>
+          <transition-group name="frame-fade">
+            <v-frame v-for="(frame, index) in frames" :index="index" :frame="frame" :key="frame.key"></v-frame>
+          </transition-group>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
 import vFrame from './frame.vue'
-import _ from 'lodash';
+// import _ from 'lodash';
 export default {
   components: {
     vFrame
@@ -26,6 +33,9 @@ export default {
   computed: {
     frames() {
       return this.$store.getters.frames
+    },
+    pinFrames() {
+      return this.$store.getters.pinFrames
     }
   }
 }
@@ -52,6 +62,9 @@ export default {
   transition-timing-function: cubic-bezier(.694, .0482, .335, 1);
   &.active {
     left: 380px;
+  }
+  &.hide-scrollbar{
+    overflow: hidden;
   }
   .frame-fade-enter-active,
   .frame-fade-leave-active {

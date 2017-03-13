@@ -11,7 +11,7 @@
             <a class="el-icon-plus" @click="toggleFullscreen"></a>
           </li>
           <li>
-            <a class="el-icon-arrow-up" @click="toggleFrame"></a>
+            <a class="el-icon-arrow-up" @click="toggleFrame($event)"></a>
           </li>
           <li>
             <a class="el-icon-close" @click="removeFrame(index)"></a>
@@ -42,20 +42,21 @@ export default {
   },
   props: ['index', 'frame', 'pined'],
   methods: {
-    toggleFrame: function() {
+    toggleFrame: function(event) {
+      $(event.target).toggleClass('slide-down');
       $(this.$el).find('.frame-content').toggleClass('slide-up')
     },
     removeFrame: function(index) {
       this.$store.commit('removeFrame', index)
     },
-    pinFrame: function(index, event){
+    pinFrame: function(index, event) {
       let $target = $(event.target)
-      if(this.pined){
-        this.$store.commit('unpinFrame', index)  
-      }else{
-        this.$store.commit('pinFrame', index)  
+      if (this.pined) {
+        this.$store.commit('unpinFrame', index)
+      } else {
+        this.$store.commit('pinFrame', index)
       }
-      
+
     },
     toggleFullscreen: function() {
       let $el = $(this.$el)
@@ -95,12 +96,12 @@ export default {
     position: relative;
     background-color: #fff;
     header {
-      background-color: #1D8CE0;
+      // background-color: #1D8CE0;
       color: #848790;
       padding-left: 10px;
       border-bottom: 1px solid #e6e9ef;
       height: 39px;
-      color: #fff;
+      // color: #fff;
       position: relative;
       h4 {
         margin: 0;
@@ -140,8 +141,20 @@ export default {
             text-align: center;
             line-height: 39px;
             cursor: pointer;
-            &.active{
+            &:hover {
+              background: #40454f;
+              color: #fff;
+            }
+            &.active {
               color: red;
+            }
+            &:before{
+              transition: transform .2s ease-out;
+              transform-style: preserve-3d;
+              display: inline-block;
+            }
+            &.slide-down:before{
+              transform: rotateX(180deg);
             }
           }
         }

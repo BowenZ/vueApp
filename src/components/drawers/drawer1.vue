@@ -5,13 +5,13 @@
     </header>
     <section class="drawer-content">
       <div class="drawer-box">
-        <h5>This is a h5 titile</h5>
+        <v-search title="这是一个h5标题"></v-search>
         <el-button type="gray" v-for="label in nodeLabels" :key="label.id" @click="getData">
           {{label.name}}
         </el-button>
       </div>
       <div class="drawer-box">
-        <h5>默认显示颜色</h5>
+        <v-search title="这是一个h5标题"></v-search>
         <el-button type="gray" v-for="label in relationshipLabels" :key="label.id" @click="getData">
           {{label.name}}
         </el-button>
@@ -20,8 +20,15 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import {
+  mapGetters,
+  mapActions
+} from 'vuex'
+import vSearch from '../secondary/search.vue'
 export default {
+  components: {
+    vSearch
+  },
   data: function() {
     return {
       title: 'This is a header'
@@ -36,7 +43,7 @@ export default {
     relationshipLabels: 'relationshipLabels'
   }),
   methods: {
-    getData: function(){
+    getData: function() {
       this.$store.dispatch('getSearchLabels')
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div class="main-container">
-    <h1>{{title}}</h1>
+    <v-editor></v-editor>
     <!-- <router-view></router-view> -->
     <div class="frame-container">
       <div class="frame-stream">
@@ -19,10 +19,12 @@
   </div>
 </template>
 <script>
+import vEditor from './editor.vue'
 import vFrame from './frame.vue'
 // import _ from 'lodash';
 export default {
   components: {
+    vEditor,
     vFrame
   },
   data: function() {
@@ -65,6 +67,20 @@ export default {
   }
   &.hide-scrollbar{
     overflow: hidden;
+  }
+  .frame-container{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 80px;
+    bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-transition: all .25s;
+    -moz-transition: all .25s;
+    -o-transition: all .25s;
+    -ms-transition: all .25s;
+    transition: all .25s;
   }
   .frame-fade-enter-active,
   .frame-fade-leave-active {

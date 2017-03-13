@@ -3,24 +3,24 @@
     <nav>
       <ul>
         <li>
-          <a href="" @click.prevent="toggleDrawer(0, $event)"><span class="el-icon-menu"></span></a>
+          <a href="" title="菜单" @click.prevent="toggleDrawer(0, $event)"><span class="el-icon-menu"></span></a>
         </li>
         <li>
-          <a href="" @click.prevent="toggleDrawer(1, $event)"><span class="el-icon-star-off"></span></a>
+          <a href="" title="菜单" @click.prevent="toggleDrawer(1, $event)"><span class="el-icon-star-off"></span></a>
         </li>
         <li>
-          <a href="" @click.prevent="toggleDrawer(2, $event)"><span class="el-icon-date"></span></a>
+          <a href="" title="菜单" @click.prevent="toggleDrawer(2, $event)"><span class="el-icon-date"></span></a>
         </li>
       </ul>
       <ul>
         <li>
-          <a href="" @click.prevent="toggleDrawer(3, $event)"><span class="el-icon-search"></span></a>
+          <a href="" title="菜单" @click.prevent="toggleDrawer(3, $event)"><span class="el-icon-search"></span></a>
         </li>
         <li>
-          <a href="" @click.prevent="toggleDrawer(4, $event)"><span class="el-icon-setting"></span></a>
+          <a href="" title="菜单" @click.prevent="toggleDrawer(4, $event)"><span class="el-icon-setting"></span></a>
         </li>
         <li>
-          <a href="" @click.prevent="toggleDrawer(5, $event)"><span class="el-icon-share"></span></a>
+          <a href="" title="菜单" @click.prevent="toggleDrawer(5, $event)"><span class="el-icon-share"></span></a>
         </li>
       </ul>
     </nav>

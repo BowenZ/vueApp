@@ -1,7 +1,6 @@
 <template>
   <div class="main-container">
     <v-editor></v-editor>
-    <!-- <router-view></router-view> -->
     <div class="frame-container">
       <div class="frame-stream">
         <div class="frame-pined">
@@ -16,6 +15,7 @@
         </div>
       </div>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 <script>
@@ -65,10 +65,10 @@ export default {
   &.active {
     left: 380px;
   }
-  &.hide-scrollbar{
+  &.hide-scrollbar {
     overflow: hidden;
   }
-  .frame-container{
+  .frame-container {
     position: absolute;
     left: 0;
     right: 0;

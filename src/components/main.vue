@@ -15,7 +15,9 @@
         </div>
       </div>
     </div>
-    <router-view></router-view>
+    <transition name="view-fade">
+      <router-view class="view-fade"></router-view>
+    </transition>
   </div>
 </template>
 <script>
@@ -29,7 +31,7 @@ export default {
   },
   data: function() {
     return {
-      title: 'I am a MAIN container!'
+      
     }
   },
   computed: {
@@ -43,6 +45,12 @@ export default {
 }
 </script>
 <style lang="scss">
+.view-fade {
+  transition: all .5s cubic-bezier(.55,0,.1,1);
+}
+.view-fade-enter, .view-fade-leave-active {
+  opacity: 0;
+}
 .main-container {
   position: absolute;
   top: 0;

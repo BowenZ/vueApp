@@ -38,7 +38,7 @@
         ;
         vertical-align: middle;
     }
-    #{$selector} {
+    $selector {
         width: 100%;
         height: $height;
         box-sizing: border-box;

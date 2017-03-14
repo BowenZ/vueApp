@@ -1,28 +1,32 @@
 <template>
   <div id="app">
-    <v-menu></v-menu>
-    <v-main :class="{active: drawerIsOpened}"></v-main>
+    <transition name="view-fade">
+      <router-view class="view-fade"></router-view>
+    </transition>
   </div>
 </template>
 <script>
-import vMenu from './components/menu.vue'
-import vMain from './components/main.vue'
+import vHello from './components/Hello.vue'
+import vProject from './components/Project.vue'
 export default {
   components: {
-    vMenu,
-    vMain
+    vHello,
+    vProject
   },
-  data: function() {
+  data () {
     return {
-      visible: false
-    }
-  },
-  computed: {
-    drawerIsOpened: function(){
-      return this.$store.state.drawerIsOpened
+      transitionName: 'view-slide-left'
     }
   }
 }
 </script>
-<style lang="scss">
+
+<style>
+.view-fade {
+  transition: all .5s cubic-bezier(.55,0,.1,1);
+}
+.view-fade-enter, .view-fade-leave-active {
+  opacity: 0;
+}
+
 </style>
